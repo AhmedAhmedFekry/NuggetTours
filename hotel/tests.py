@@ -113,7 +113,7 @@ class HotelAPITestCase(TestCase):
 
     def test_hotels_filter_by_city(self):
         url = reverse('hotel-list')
-        response = self.client.get(url, {'page_size': 1,'city': 'badar'})
+        response = self.client.get(url, {'page_size': 1,'city': 'Badar'})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["count"], 1)
         self.assertEqual(response.data["results"][0]['name'], 'hotel 1')
