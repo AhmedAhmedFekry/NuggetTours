@@ -28,9 +28,9 @@ class HotelViewSet(viewsets.ModelViewSet):
         if min_price:
             queryset = queryset.filter(price_per_night__gte=min_price) 
         if city:
-            queryset = queryset.filter(city=city)
+            queryset = queryset.filter(city__iexact=city)
         if country:
-            queryset = queryset.filter(country=country)
+            queryset = queryset.filter(country__iexact=country)
         if is_available:
             queryset = queryset.filter(is_available=True)
 
