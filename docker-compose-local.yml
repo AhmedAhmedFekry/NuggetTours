@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+
+      nugget_pgdb:
+        image: postgres:14-alpine
+        volumes:
+          - ./data/db:/var/lib/postgresql/data
+        container_name: nugget_pgdb
+        environment:
+          - POSTGRES_DB=nugget_db
+          - POSTGRES_USER=nugget_user
+          - POSTGRES_PASSWORD=TheNewssh155
+        logging:
+          driver: none
+
+      nugget_django:
+        build:
+          context: .
+          dockerfile: docker/django/Dockerfile
+        container_name: nugget_django
+        command: python manage.py runserver 0.0.0.0:8000
+        volumes:
+            - .:/code
+        ports:
+            - "8000:8000"
+        depends_on:
+            - nugget_pgdb
+        restart: unless-stopped
